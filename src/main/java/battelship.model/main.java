@@ -1,6 +1,6 @@
-package battelship;
+package battelship.model;
 
-public class Main {
+public class main {
     public static void main(String[] args){
         System.out.println("Hier entsteht das Spiel Schiffe versenken!");
     }
