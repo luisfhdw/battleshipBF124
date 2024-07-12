@@ -12,4 +12,3 @@ plugins {
 }
 
 rootProject.name = "battelship"
-include("app")
