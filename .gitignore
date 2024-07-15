@@ -29,5 +29,10 @@ replay_pid*
 # Ignore Gradle build output directory
 build
 
-#VSCode Settings
+# VSCode Settings
 .vscode
+
+# Eclipse / JDTLS Settings
+.classpath
+.project
+.settings/
