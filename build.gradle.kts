@@ -3,7 +3,6 @@
  *
  * This generated file contains a sample Java application project to get you started.
  * For more details on building Java & JVM projects, please refer to https://docs.gradle.org/8.8/userguide/building_java_projects.html in the Gradle documentation.
- * This project uses @Incubating APIs which are subject to change.
  */
 
 plugins {
@@ -17,28 +16,26 @@ repositories {
 }
 
 dependencies {
+    // Use TestNG framework, also requires calling test.useTestNG() below
+    testImplementation(libs.testng)
+
     // This dependency is used by the application.
     implementation(libs.guava)
-}
-
-testing {
-    suites {
-        // Configure the built-in test suite
-        val test by getting(JvmTestSuite::class) {
-            // Use TestNG test framework
-            useTestNG("7.5.1")
-        }
-    }
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(22)
     }
 }
 
 application {
     // Define the main class for the application.
     mainClass = "org.example.App"
+}
+
+tasks.named<Test>("test") {
+    // Use TestNG for unit tests.
+    useTestNG()
 }
