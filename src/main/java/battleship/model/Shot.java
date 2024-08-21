@@ -1,7 +1,7 @@
 package battleship.model;
 
 public class Shot extends Event {
-    private final Coordinate coordinate;
+    public final Coordinate coordinate;
     private final Player player;
 
     public Shot(Coordinate coordinate, Player player) {
