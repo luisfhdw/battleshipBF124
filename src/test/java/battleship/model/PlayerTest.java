@@ -1,14 +1,22 @@
 package battleship.model;
-
-import org.testng.*;
+import battelship.model.Player;
+import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+    public class PlayerTest {
 
-public class PlayerTest {
+    @DataProvider
+    public Object[][] inverseData(){
+            return new Object[][]{
+                    {Player.FIRST,Player.SECOND},
+                    {Player.SECOND,Player.FIRST}
 
-    @Test
-    public void inverseTest() {
-        Assert.assertEquals(Player.FIRST.inverse(), Player.SECOND);
-        Assert.assertEquals(Player.SECOND.inverse(), Player.FIRST);
+            };
+    }
+
+    @Test(dataProvider = "inverseData")
+    public void invserseTest(Player given, Player expected){
+        Assert.assertEquals(given.inverse(),expected);
     }
 
 }

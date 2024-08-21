@@ -1,24 +1,24 @@
-package battleship.model;
+package battelship.model;
 
-public class Shot extends Event {
+import java.util.UUID;
 
-    public final Coordinate coordinate;
+public class Shot extends Event{
+    final Coordinate coordinate;
+    final Player player;
 
-    public final Player player;
-
-    public Shot(final Coordinate coordinate, final Player player) {
+    public Shot(Coordinate coordinate, Player player) {
+        super();
         this.coordinate = coordinate;
         this.player = player;
     }
 
     @Override
-    public boolean isShipPlacementEvent(final Player player) {
+    public boolean isShipPlacementEvent(Player player) {
         return false;
     }
 
     @Override
-    public boolean isShotEvent(final Player player) {
-        return this.player == player;
+    public boolean isShotEvent(Player player) {
+        return true;
     }
-
 }

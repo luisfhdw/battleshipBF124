@@ -1,7 +1,10 @@
-package battleship.model;
+package battelship.model;
 
 public enum Direction {
-
-    EAST, NORTH, SOUTH, WEST
-
+    NORTH,
+    EAST,
+    SOUTH,
+    WEST
 }
+
+
