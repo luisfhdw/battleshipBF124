@@ -1,48 +1,45 @@
-package battelship.model;
-import java.util.UUID;
+package battleship.model;
+
+import java.util.*;
 
 public abstract class Event implements Comparable<Event> {
-   public final UUID id;
-   public final long timestamp;
+
+    public final UUID id;
+
+    public final long timestamp;
 
     public Event() {
-        this.id = UUID.randomUUID();
-        this.timestamp = System.currentTimeMillis();
+        this(UUID.randomUUID(), System.currentTimeMillis());
     }
 
-   public Event(UUID id, long timestamp) {
+    public Event(final UUID id, final long timestamp) {
         this.id = id;
         this.timestamp = timestamp;
     }
 
-
-    //Overide weil Object methode equals anders funktioniert.
     @Override
-    public boolean equals(Object object) {
-      if( object == null || !(object instanceof Event))
-          return false;
-      Event other = (Event) object;
-      return  this.id.equals(other.id);
-    }
-
-    @Override
-    public int hashCode(){
-        return this.hashCode();
-    }
-
-    //Durch vergleich mit compareTo definiert man eine Reihenfolge
-    @Override
-    public int compareTo(Event other) {
-       if(Long.compare(this.timestamp, other.timestamp) == 0){
-        //Die untere CompareTo methode nutztz die Compareto von Event
-        return this.id.compareTo(other.id);}
-            return Long.compare(this.timestamp,other.timestamp);
+    public int compareTo(final Event other) {
+        final int result = Long.compare(this.timestamp, other.timestamp);
+        if (result == 0) {
+            return this.id.compareTo(other.id);
         }
+        return result;
+    }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (o instanceof Event) {
+            return this.id.equals(((Event)o).id);
+        }
+        return false;
+    }
 
+    @Override
+    public int hashCode() {
+        return this.id.hashCode();
+    }
 
     public abstract boolean isShipPlacementEvent(Player player);
-
 
     public abstract boolean isShotEvent(Player player);
 
