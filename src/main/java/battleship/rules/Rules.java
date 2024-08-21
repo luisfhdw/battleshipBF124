@@ -49,7 +49,26 @@ public interface Rules {
     }
 
     default boolean validShipPlacement(final ShipPlacement placement, final Collection<Coordinate> shipCoordinates) {
-        return false; //TODO
+        return this.validPlacementCoordinates(placement) && this.noConflict(placement, shipCoordinates);
+    }
+
+    private boolean noConflict(final ShipPlacement placement, final Collection<Coordinate> shipCoordinates) {
+        for (final Coordinate existing : shipCoordinates) {
+            if (
+                placement
+                .toCoordinates()
+                .filter(coordinate -> this.placementConflict(coordinate, existing))
+                .findAny()
+                .isPresent()
+            ) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean validPlacementCoordinates(final ShipPlacement placement) {
+        return placement.toCoordinates().allMatch(this::validCoordinate);
     }
 
 }
