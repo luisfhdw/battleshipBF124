@@ -1,21 +1,21 @@
-package battelship.model;
+package battleship.model;
 
 public enum ShipType {
 
-    //ENUM konstanten sind Konstruktor-Aufrufe
-        BATTLESHIP("Schlachtschiff",4),
-        CRUISER("Kreuzer",3),
-        CANNON_BOAT("Kanonenboot",1),
-        CARRIER("Flugzeugträger",5),
-        DESTROYER("Zerstörer",2),
-        SUBMARINE("U-Boot",3);
+    BATTLESHIP("Schlachtschiff", 4),
+    CANNON_BOAT("Kanonenboot", 1),
+    CARRIER("Flugzeugträger", 5),
+    CRUISER("Kreuzer", 3),
+    DESTROYER("Zerstörer", 2),
+    SUBMARINE("U-Boot", 3);
 
-        final int lenght;
-        final String name;
+    public int length;
 
-        private ShipType(String name, int lenght) {
-            this.name = name;
-            this.lenght = lenght;
+    public String name;
 
+    private ShipType(final String name, final int length) {
+        this.name = name;
+        this.length = length;
     }
+
 }
