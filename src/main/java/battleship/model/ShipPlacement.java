@@ -8,7 +8,7 @@ public class ShipPlacement extends Event {
     private final Coordinate start;
     private final ShipType type;
 
-    public ShipPlacement(Direction direction, Player player, Coordinate start, ShipType type) {
+    public ShipPlacement(ShipType type, Coordinate start, Direction direction, Player player) {
         super();
         this.direction = direction;
         this.player = player;
@@ -54,13 +54,11 @@ public class ShipPlacement extends Event {
 
     @Override
     public boolean isShotEvent(Player player) {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean isShipPlacementEvent(Player player) {
-        // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 }
