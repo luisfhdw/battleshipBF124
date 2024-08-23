@@ -7,16 +7,15 @@ import battleship.model.*;
 public interface Rules {
 
     public static boolean isBetween(final int lowerBoundInclusive, final int number, final int upperBoundExclusive) {
-        return false; //TODO
+        return number >= lowerBoundInclusive && number < upperBoundExclusive;
     }
 
     int getHorizontalLength();
 
     Set<Coordinate> getImpossibleCoordinatesAfterShot(
-        final Player playerWhoShot,
-        final Coordinate shot,
-        final Game game
-    );
+            final Player playerWhoShot,
+            final Coordinate shot,
+            final Game game);
 
     Optional<Turn> getNextTurn(final Game game);
 
@@ -28,11 +27,9 @@ public interface Rules {
 
     default boolean shipPlacement(final Game game, final ShipType type, final Player player, final Event event) {
         if (event.isShipPlacementEvent(player)) {
-            final ShipPlacement placement = (ShipPlacement)event;
-            if (
-                placement.type == type
-                && this.validShipPlacement(placement, game.getShipCoordinates(placement.player))
-            ) {
+            final ShipPlacement placement = (ShipPlacement) event;
+            if (placement.type == type
+                    && this.validShipPlacement(placement, game.getShipCoordinates(placement.player))) {
                 game.addEvent(event);
                 return true;
             }
@@ -41,11 +38,19 @@ public interface Rules {
     }
 
     default boolean shot(final Game game, final Player player, final Event event) {
-        return false; // TODO
+        if (event.isShotEvent(player)) {
+            final Shot shot = (Shot) event;
+            if (this.validCoordinate(shot.coordinate)) {
+                game.addEvent(event);
+                return true;
+            }
+        }
+        return false;
     }
 
     default boolean validCoordinate(final Coordinate coordinate) {
-        return false; //TODO
+        return coordinate.row() >= 0 && coordinate.row() < getVerticalLength() && coordinate.column() >= 0
+                && coordinate.column() < getHorizontalLength();
     }
 
     default boolean validShipPlacement(final ShipPlacement placement, final Collection<Coordinate> shipCoordinates) {
@@ -54,13 +59,11 @@ public interface Rules {
 
     private boolean noConflict(final ShipPlacement placement, final Collection<Coordinate> shipCoordinates) {
         for (final Coordinate existing : shipCoordinates) {
-            if (
-                placement
-                .toCoordinates()
-                .filter(coordinate -> this.placementConflict(coordinate, existing))
-                .findAny()
-                .isPresent()
-            ) {
+            if (placement
+                    .toCoordinates()
+                    .filter(coordinate -> this.placementConflict(coordinate, existing))
+                    .findAny()
+                    .isPresent()) {
                 return false;
             }
         }
