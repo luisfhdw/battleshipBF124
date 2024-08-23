@@ -52,7 +52,8 @@ public interface Rules {
     }
 
     default boolean validCoordinate(final Coordinate coordinate) {
-        return false; //TODO
+        return Rules.isBetween(0, coordinate.column(), this.getHorizontalLength())
+            && Rules.isBetween(0, coordinate.row(), this.getVerticalLength());
     }
 
     default boolean validShipPlacement(final ShipPlacement placement, final Collection<Coordinate> shipCoordinates) {
