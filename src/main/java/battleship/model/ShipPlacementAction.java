@@ -17,13 +17,13 @@ public class ShipPlacementAction extends TurnAction {
     public boolean equals(Object obj) {
         if (obj instanceof ShipPlacementAction) {
             ShipPlacementAction spa = (ShipPlacementAction) obj;
-            return this.player == spa.player && this.type == spa.type;
+            return this.player.equals(spa.player) && this.type.equals(spa.type);
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return player.hashCode() + type.hashCode();
+        return player.hashCode() * 3 + type.hashCode() * 5;
     }
 }
