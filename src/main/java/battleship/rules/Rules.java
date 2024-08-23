@@ -39,7 +39,7 @@ public interface Rules {
 
     default boolean shot(final Game game, final Player player, final Event event) {
         if (event.isShotEvent(player)) {
-            final Shot shot = (Shot) event;
+            final Shot shot = (Shot)event;
             if (this.validCoordinate(shot.coordinate)) {
                 game.addEvent(event);
                 return true;
@@ -49,8 +49,8 @@ public interface Rules {
     }
 
     default boolean validCoordinate(final Coordinate coordinate) {
-        return isBetween(0, coordinate.row(), getVerticalLength())
-                && isBetween(0, coordinate.column(), getHorizontalLength());
+        return Rules.isBetween(0, coordinate.column(), this.getHorizontalLength())
+            && Rules.isBetween(0, coordinate.row(), this.getVerticalLength());
     }
 
     default boolean validShipPlacement(final ShipPlacement placement, final Collection<Coordinate> shipCoordinates) {
