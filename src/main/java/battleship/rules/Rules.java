@@ -49,8 +49,8 @@ public interface Rules {
     }
 
     default boolean validCoordinate(final Coordinate coordinate) {
-        return coordinate.row() >= 0 && coordinate.row() < getVerticalLength() && coordinate.column() >= 0
-                && coordinate.column() < getHorizontalLength();
+        return isBetween(0, coordinate.row(), getVerticalLength())
+                && isBetween(0, coordinate.column(), getHorizontalLength());
     }
 
     default boolean validShipPlacement(final ShipPlacement placement, final Collection<Coordinate> shipCoordinates) {
