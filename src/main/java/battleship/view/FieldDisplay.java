@@ -2,6 +2,9 @@ package battleship.view;
 import javax.swing.*;
 import battleship.model.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.function.Consumer;
 
 
 public class FieldDisplay extends JButton{
@@ -36,6 +39,15 @@ public class FieldDisplay extends JButton{
 		return getSize();
 	}
 	
+	public void addListener(final Consumer<Coordinate> listener) {
+		this.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.accept(coordinate);
+			}
+			
+		});
+	}
 
 }
