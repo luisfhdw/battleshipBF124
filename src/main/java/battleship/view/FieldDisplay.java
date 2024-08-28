@@ -1,7 +1,7 @@
 package battleship.view;
 import javax.swing.*;
-
 import battleship.model.*;
+import java.awt.*;
 
 
 public class FieldDisplay extends JButton{
@@ -26,6 +26,16 @@ public class FieldDisplay extends JButton{
 		this.size = size;
 		invalidate();
 		repaint();
-		
 	}
+
+	public Dimension getSize(){
+		return new Dimension(this.size,this.size);
+	}
+
+	public Dimension getPreferredSize(){
+		return getSize();
+	}
+	
+
+
 }
