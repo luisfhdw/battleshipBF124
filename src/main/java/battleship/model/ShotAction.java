@@ -1,26 +1,28 @@
 package battleship.model;
 
 public class ShotAction extends TurnAction {
+
     public ShotAction(final Player player) {
         super(player);
     }
 
     @Override
-    public Boolean apply(final EventAndState t) {
-        return t.rules().shot(t.game(), this.player, t.event());
+    public Boolean apply(final EventAndState eventAndState) {
+        return eventAndState.rules().shot(eventAndState.game(), this.player, eventAndState.event());
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof ShotAction) {
-            ShotAction sa = (ShotAction) obj;
-            return sa.player == this.player;
+    public boolean equals(final Object o) {
+        if (o instanceof ShotAction) {
+            final ShotAction other = (ShotAction)o;
+            return this.player == other.player;
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return player.hashCode();
+        return this.player.hashCode() * 5;
     }
+
 }

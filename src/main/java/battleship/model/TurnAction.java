@@ -1,6 +1,6 @@
 package battleship.model;
 
-import java.util.function.Function;
+import java.util.function.*;
 
 public abstract class TurnAction implements Function<EventAndState, Boolean> {
 

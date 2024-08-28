@@ -1,29 +1,36 @@
 package battleship.model;
 
 public class ShipPlacementAction extends TurnAction {
-    public final ShipType type;
 
-    public ShipPlacementAction(final Player player, final ShipType type) {
+    public final ShipType shipType;
+
+    public ShipPlacementAction(final Player player, final ShipType shipType) {
         super(player);
-        this.type = type;
+        this.shipType = shipType;
     }
 
     @Override
-    public Boolean apply(final EventAndState t) {
-        return t.rules().shipPlacement(t.game(), this.type, this.player, t.event());
+    public Boolean apply(final EventAndState eventAndState) {
+        return eventAndState.rules().shipPlacement(
+            eventAndState.game(),
+            this.shipType,
+            this.player,
+            eventAndState.event()
+        );
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof ShipPlacementAction) {
-            ShipPlacementAction spa = (ShipPlacementAction) obj;
-            return this.player.equals(spa.player) && this.type.equals(spa.type);
+    public boolean equals(final Object o) {
+        if (o instanceof ShipPlacementAction) {
+            final ShipPlacementAction other = (ShipPlacementAction)o;
+            return this.player == other.player && this.shipType == other.shipType;
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return player.hashCode() * 3 + type.hashCode() * 5;
+        return this.player.hashCode() * 3 + this.shipType.hashCode() * 7;
     }
+
 }
